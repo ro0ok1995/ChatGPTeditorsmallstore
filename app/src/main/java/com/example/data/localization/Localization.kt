@@ -492,6 +492,18 @@ interface Strings {
     val developerInfo: String
     val languageTitle: String
     val unknownCustomer: String
+    val storeNameLabel: String
+    val ownerNameLabel: String
+    val phoneLabel: String
+    val addressLabel: String
+    val currencyLabel: String
+    val cleanDatabaseConfirm: String
+    val databaseCleanedSuccess: String
+    val cleanDatabaseConfirmBtn: String
+    val systemStatusTitle: String
+    val totalTransactions: String
+    val databaseStatusTitle: String
+    val databaseActiveStatus: String
 }
 
 object ArabicStrings : Strings {
@@ -953,6 +965,19 @@ object ArabicStrings : Strings {
     override val developerInfo = "Google AI Studio Developer"
     override val languageTitle = "لغة التطبيق"
     override val unknownCustomer = "زبون غير محدد"
+    override val tabDataReports = "تقارير PDF"
+    override val storeNameLabel = "اسم المحل"
+    override val ownerNameLabel = "اسم المالك"
+    override val phoneLabel = "الهاتف"
+    override val addressLabel = "العنوان"
+    override val currencyLabel = "العملة"
+    override val cleanDatabaseConfirm = "هل أنت متأكد من مسح جميع بيانات قاعدة البيانات؟"
+    override val databaseCleanedSuccess = "تم تنظيف قاعدة البيانات بنجاح"
+    override val cleanDatabaseConfirmBtn = "مسح البيانات"
+    override val systemStatusTitle = "حالة النظام"
+    override val totalTransactions = "إجمالي المعاملات"
+    override val databaseStatusTitle = "حالة قاعدة البيانات"
+    override val databaseActiveStatus = "نشطة"
 }
 
 object EnglishStrings : Strings {
@@ -1443,4 +1468,17 @@ fun formatDateOnly(timestamp: Long): String {
 fun formatTimeOnly(timestamp: Long): String {
     val sdf = SimpleDateFormat("HH:mm", Locale.US)
     return sdf.format(Date(timestamp))
+    override val tabReports = "Reports"
+    override val storeNameLabel = "Store name"
+    override val ownerNameLabel = "Owner name"
+    override val phoneLabel = "Phone"
+    override val addressLabel = "Address"
+    override val currencyLabel = "Currency"
+    override val cleanDatabaseConfirm = "Are you sure you want to clear all database data?"
+    override val databaseCleanedSuccess = "Database cleaned successfully"
+    override val cleanDatabaseConfirmBtn = "Clear data"
+    override val systemStatusTitle = "System status"
+    override val totalTransactions = "Total transactions"
+    override val databaseStatusTitle = "Database status"
+    override val databaseActiveStatus = "Active"
 }

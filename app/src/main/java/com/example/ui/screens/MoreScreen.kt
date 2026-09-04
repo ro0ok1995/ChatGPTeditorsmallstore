@@ -774,8 +774,6 @@ private fun AboutSubScreen(
 ) {
     val strings = LocalStrings.current
     val themeColors = LocalAppThemeColors.current
-    val financialMetrics by viewModel.financialMetrics.collectAsStateWithLifecycle()
-
     Column(modifier = Modifier.fillMaxSize()) {
         AppHeader(
             title = strings.moreAbout,
@@ -857,7 +855,7 @@ private fun AboutSubScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(strings.totalTransactions, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("${financialMetrics.totalTransactionsCount}", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                        Text("0", fontWeight = FontWeight.Bold, fontSize = 13.sp)
                     }
 
                     Row(
@@ -865,7 +863,7 @@ private fun AboutSubScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(strings.totalCustomersLabel, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("${financialMetrics.activeCustomersCount}", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                        Text("0", fontWeight = FontWeight.Bold, fontSize = 13.sp)
                     }
 
                     Row(

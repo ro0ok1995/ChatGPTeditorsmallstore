@@ -862,6 +862,8 @@ fun StatementsScreen(
 /**
  * Top 3 Financial Metric Cards (Debt, Purchases, Payments)
  */
+
+}
 @Composable
 private fun FinancialMetricCard(
     title: String,

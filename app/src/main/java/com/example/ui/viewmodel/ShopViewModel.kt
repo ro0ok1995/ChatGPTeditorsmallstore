@@ -748,7 +748,7 @@ class ShopViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             repository.markNotificationAsRead(notification.id)
             if (notification.customerId != null) {
-                val customer = repository.getCustomerById(notification.customerId)?.toDomain()
+                val customer = repository.getCustomerById(notification.customerId)
                 if (customer != null) {
                     openStatementsForCustomer(customer)
                 }

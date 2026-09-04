@@ -359,7 +359,14 @@ fun ReportsFlowContent(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "4. " + strings.previewTitle,
+                        val previewTitle = when (selectedReportKind) {
+                    ReportKind.CUSTOMER_STATEMENT -> "${strings.reportCustomerStatement}: ${selectedCustomer?.name ?: strings.allCustomersMode}"
+                    ReportKind.ALL_DEBTS_SUMMARY -> strings.reportAllCustomersDebts
+                    ReportKind.PRODUCT_SALES -> "${strings.reportProductSales}: ${selectedProduct?.name ?: strings.all}"
+                    ReportKind.PRODUCTS_CATALOG -> strings.reportAllProductsCatalog
+                }
+
+                text = "4. " + strings.previewTitle,
                         style = MaterialTheme.typography.titleSmall.copy(
                             fontWeight = FontWeight.Bold,
                             color = themeColors.primary
@@ -592,7 +599,7 @@ fun ReportsFlowContent(
             currentStart = customStartDate,
             currentEnd = customEndDate,
             onDismiss = { showDatePickerDialog = false },
-            onApply = { start, end ->
+            onConfirm = { start, end ->
                 customStartDate = start
                 customEndDate = end
                 showDatePickerDialog = false

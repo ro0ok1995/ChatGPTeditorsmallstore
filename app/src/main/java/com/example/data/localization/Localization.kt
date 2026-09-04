@@ -507,6 +507,7 @@ interface Strings {
 }
 
 object ArabicStrings : Strings {
+    override val tabReports = "التقارير"
     override val appName = "حسابات المحل"
     override val customer = "العميل"
     override val currencySymbol = "₪"

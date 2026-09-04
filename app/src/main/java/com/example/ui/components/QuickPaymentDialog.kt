@@ -70,7 +70,7 @@ import com.example.ui.viewmodel.ShopViewModel
  * Supports choosing customer with live debt search, real-time balance calculations,
  * "Pay All" quick action, double submission protection, and instant debt reduction.
  */
-@Composable
+
 private enum class QuickPaymentMode { FULL, PARTIAL }
 
 @Composable

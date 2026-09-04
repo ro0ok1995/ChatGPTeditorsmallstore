@@ -284,7 +284,7 @@ fun ThemedGlobalDrawer(
                 isSelected = false,
                 testTag = "drawer_item_stats",
                 onClick = {
-                    viewModel.openAnalysisCenter(ShopViewModel.AnalysisScreenTab.STATISTICS)
+                    viewModel.openAnalysisCenter(tab = ShopViewModel.AnalysisScreenTab.STATISTICS)
                     onCloseDrawer()
                 }
             )
@@ -295,7 +295,7 @@ fun ThemedGlobalDrawer(
                 isSelected = false,
                 testTag = "drawer_item_statements",
                 onClick = {
-                    viewModel.openAnalysisCenter(ShopViewModel.AnalysisScreenTab.ACCOUNT_STATEMENT)
+                    viewModel.openAnalysisCenter(tab = ShopViewModel.AnalysisScreenTab.ACCOUNT_STATEMENT)
                     onCloseDrawer()
                 }
             )
@@ -306,7 +306,7 @@ fun ThemedGlobalDrawer(
                 isSelected = false,
                 testTag = "drawer_item_reports",
                 onClick = {
-                    viewModel.openAnalysisCenter(ShopViewModel.AnalysisScreenTab.REPORTS)
+                    viewModel.openAnalysisCenter(tab = ShopViewModel.AnalysisScreenTab.REPORTS)
                     onCloseDrawer()
                 }
             )

@@ -320,7 +320,7 @@ interface Strings {
     val tabCustomers: String
     val tabProducts: String
     val tabBackup: String
-    val tabReports: String
+    val tabDataReports: String
     val statusActive: String
     val statusArchived: String
     val statusDeleted: String
@@ -1242,7 +1242,7 @@ object EnglishStrings : Strings {
     override val tabCustomers = "Customers"
     override val tabProducts = "Products"
     override val tabBackup = "Backup & Restore"
-    override val tabReports = "PDF Reports"
+    override val tabDataReports = "PDF Reports"
     override val statusActive = "Active"
     override val statusArchived = "Archived"
     override val statusDeleted = "Deleted"

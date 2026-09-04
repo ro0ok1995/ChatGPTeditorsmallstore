@@ -548,11 +548,9 @@ private fun AppSettingsSubScreen(
                     Spacer(modifier = Modifier.height(12.dp))
 
                     val themes = listOf(
-                        AppVisualTheme.EMERALD to ("الزمردي (Emerald)"),
-                        AppVisualTheme.CLASSIC_BLUE to ("الأزرق الكلاسيكي (Classic Blue)"),
-                        AppVisualTheme.ROYAL_PURPLE to ("البنفسجي الملكي (Royal Purple)"),
-                        AppVisualTheme.AMBER to ("العنبري الدافئ (Warm Amber)"),
-                        AppVisualTheme.ROSE to ("الوردي الناعم (Rose)")
+                        AppVisualTheme.BLACK_AND_WHITE to "الأبيض والأسود (Black & White)",
+                        AppVisualTheme.PURPLE to "البنفسجي (Purple)",
+                        AppVisualTheme.GOLD to "الذهبي (Gold)"
                     )
 
                     themes.forEach { (theme, label) ->
@@ -560,13 +558,13 @@ private fun AppSettingsSubScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(10.dp))
-                                .clickable { viewModel.setTheme(theme) }
+                                .clickable { viewModel.setVisualTheme(theme) }
                                 .padding(vertical = 6.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             RadioButton(
                                 selected = currentTheme == theme,
-                                onClick = { viewModel.setTheme(theme) },
+                                onClick = { viewModel.setVisualTheme(theme) },
                                 colors = RadioButtonDefaults.colors(selectedColor = themeColors.primary)
                             )
                             Spacer(modifier = Modifier.width(8.dp))

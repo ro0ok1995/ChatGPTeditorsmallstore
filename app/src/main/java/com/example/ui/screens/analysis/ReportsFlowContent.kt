@@ -366,7 +366,7 @@ fun ReportsFlowContent(
                     ReportKind.PRODUCTS_CATALOG -> strings.reportAllProductsCatalog
                 }
 
-                text = "4. " + strings.previewTitle,
+                text = "4. " + previewTitle,
                         style = MaterialTheme.typography.titleSmall.copy(
                             fontWeight = FontWeight.Bold,
                             color = themeColors.primary
@@ -579,10 +579,10 @@ fun ReportsFlowContent(
                                     selectedProduct = product
                                     showProductPicker = false
                                 },
-                            color = if (selectedProduct?.id == product.id) themeColors.primaryContainer else MaterialTheme.colorScheme.surfaceVariant
+                            color = if (selectedProduct?.id == selectedProduct?.id) themeColors.primaryContainer else MaterialTheme.colorScheme.surfaceVariant
                         ) {
                             Text(
-                                text = product.name,
+                                text = selectedProduct?.name,
                                 modifier = Modifier.padding(12.dp),
                                 fontWeight = FontWeight.SemiBold
                             )

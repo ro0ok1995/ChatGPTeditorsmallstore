@@ -781,7 +781,7 @@ object ArabicStrings : Strings {
     override val tabCustomers = "الزبائن"
     override val tabProducts = "الأصناف"
     override val tabBackup = "النسخ الاحتياطي"
-    override val tabReports = "تقارير PDF"
+
     override val statusActive = "النشطة"
     override val statusArchived = "المؤرشفة"
     override val statusDeleted = "المحذوفة"
@@ -1034,7 +1034,6 @@ object EnglishStrings : Strings {
     override val tabAnalysisCenter = "Analysis Center"
     override val tabStatistics = "Statistics"
     override val tabAccountStatement = "Account Statement"
-    override val tabReports = "Reports"
     override val moreStoreInfo = "Store Information"
     override val moreStoreInfoDesc = "Edit store name, owner, phone, address, and currency"
     override val moreAppSettings = "App Settings"

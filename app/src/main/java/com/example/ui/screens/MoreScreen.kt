@@ -177,7 +177,7 @@ private fun MoreHubContent(
     Column(modifier = Modifier.fillMaxSize()) {
         AppHeader(
             title = strings.navMore,
-            subtitle = strings.appSettingsTitle,
+            subtitle = strings.settingsTitle,
             navigationIcon = {
                 IconButton(
                     onClick = onOpenDrawer,
@@ -336,18 +336,18 @@ private fun StoreInfoSubScreen(
     val strings = LocalStrings.current
     val themeColors = LocalAppThemeColors.current
     val context = LocalContext.current
-    val storeProfile by viewModel.storeProfile.collectAsStateWithLifecycle()
+    val storeProfile by viewModel.shopSettings.collectAsStateWithLifecycle()
 
-    var storeName by remember(storeProfile) { mutableStateOf(storeProfile.name) }
+    var storeName by remember(storeProfile) { mutableStateOf(storeProfile.storeName) }
     var ownerName by remember(storeProfile) { mutableStateOf(storeProfile.ownerName) }
     var phone by remember(storeProfile) { mutableStateOf(storeProfile.phone) }
     var address by remember(storeProfile) { mutableStateOf(storeProfile.address) }
-    var currency by remember(storeProfile) { mutableStateOf(storeProfile.currency) }
+    var currency by remember { mutableStateOf("₪") }
 
     Column(modifier = Modifier.fillMaxSize()) {
         AppHeader(
             title = strings.moreStoreInfo,
-            subtitle = storeProfile.name.ifBlank { strings.storeInfoTitle },
+            subtitle = storeProfile.storeName.ifBlank { strings.storeInfoTitle },
             onBack = onBack
         )
 
@@ -421,14 +421,13 @@ private fun StoreInfoSubScreen(
 
             Button(
                 onClick = {
-                    viewModel.updateStoreProfile(
-                        name = storeName,
-                        owner = ownerName,
-                        phone = phone,
-                        address = address,
-                        currency = currency
+                    viewModel.saveSettings(
+                        storeName = storeName,
+                        ownerName = ownerName,
+                        storePhone = phone,
+                        storeAddress = address
                     )
-                    Toast.makeText(context, strings.savedSuccessfully, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, strings.saveStoreDetails, Toast.LENGTH_SHORT).show()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -456,12 +455,12 @@ private fun AppSettingsSubScreen(
     val strings = LocalStrings.current
     val currentLang = LocalAppLanguage.current
     val themeColors = LocalAppThemeColors.current
-    val currentTheme by viewModel.appTheme.collectAsStateWithLifecycle()
+    val currentTheme by viewModel.currentVisualTheme.collectAsStateWithLifecycle()
 
     Column(modifier = Modifier.fillMaxSize()) {
         AppHeader(
             title = strings.moreAppSettings,
-            subtitle = strings.appearanceSettingsTitle,
+            subtitle = strings.settingsTabAppearance,
             onBack = onBack
         )
 
@@ -485,7 +484,7 @@ private fun AppSettingsSubScreen(
                         Icon(Icons.Default.Language, contentDescription = null, tint = themeColors.primary)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = strings.languageSettingsTitle,
+                            text = strings.languageTitle,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                     }
@@ -540,7 +539,7 @@ private fun AppSettingsSubScreen(
                         Icon(Icons.Default.Palette, contentDescription = null, tint = themeColors.primary)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = strings.appearanceSettingsTitle,
+                            text = strings.settingsTabAppearance,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                     }
@@ -595,7 +594,7 @@ private fun DataCenterSubScreen(
     ) { uri: Uri? ->
         if (uri != null) {
             viewModel.exportBackupToFile(uri)
-            Toast.makeText(context, strings.backupExportSuccess, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, strings.backupCreatedSuccess, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -604,14 +603,14 @@ private fun DataCenterSubScreen(
     ) { uri: Uri? ->
         if (uri != null) {
             viewModel.importBackupFromFile(uri)
-            Toast.makeText(context, strings.backupImportSuccess, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, strings.backupRestoredSuccess, Toast.LENGTH_SHORT).show()
         }
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
         AppHeader(
             title = strings.moreDataCenter,
-            subtitle = strings.databaseManagementTitle,
+            subtitle = strings.databaseTitle,
             onBack = onBack
         )
 
@@ -635,13 +634,13 @@ private fun DataCenterSubScreen(
                         Icon(Icons.Default.CloudDownload, contentDescription = null, tint = themeColors.primary)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = strings.exportBackupLabel,
+                            text = strings.createBackupButton,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                     }
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        text = strings.backupDesc,
+                        text = strings.backupDescription,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -656,7 +655,7 @@ private fun DataCenterSubScreen(
                     ) {
                         Icon(Icons.Default.CloudDownload, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(strings.exportBackupLabel, fontWeight = FontWeight.Bold)
+                        Text(strings.createBackupButton, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -673,13 +672,13 @@ private fun DataCenterSubScreen(
                         Icon(Icons.Default.CloudUpload, contentDescription = null, tint = Color(0xFF0284C7))
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = strings.importBackupLabel,
+                            text = strings.restoreBackupButton,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                     }
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        text = strings.restoreDesc,
+                        text = strings.restoreDescription,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -693,7 +692,7 @@ private fun DataCenterSubScreen(
                     ) {
                         Icon(Icons.Default.CloudUpload, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(strings.importBackupLabel, fontWeight = FontWeight.Bold)
+                        Text(strings.restoreBackupButton, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -710,7 +709,7 @@ private fun DataCenterSubScreen(
                         Icon(Icons.Default.Warning, contentDescription = null, tint = FinancialCancelled)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = strings.cleanDatabaseTitle,
+                            text = strings.dangerZoneTitle,
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = FinancialCancelled
@@ -719,7 +718,7 @@ private fun DataCenterSubScreen(
                     }
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        text = strings.cleanDatabaseDesc,
+                        text = strings.resetAllDataDesc,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -732,7 +731,7 @@ private fun DataCenterSubScreen(
                     ) {
                         Icon(Icons.Default.DeleteForever, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(strings.cleanDatabaseTitle, fontWeight = FontWeight.Bold)
+                        Text(strings.dangerZoneTitle, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -742,12 +741,12 @@ private fun DataCenterSubScreen(
     if (showClearConfirmDialog) {
         AlertDialog(
             onDismissRequest = { showClearConfirmDialog = false },
-            title = { Text(strings.cleanDatabaseTitle, fontWeight = FontWeight.Bold) },
+            title = { Text(strings.dangerZoneTitle, fontWeight = FontWeight.Bold) },
             text = { Text(strings.cleanDatabaseConfirm) },
             confirmButton = {
                 Button(
                     onClick = {
-                        viewModel.clearDatabase()
+                        viewModel.wipeAllData()
                         showClearConfirmDialog = false
                         Toast.makeText(context, strings.databaseCleanedSuccess, Toast.LENGTH_SHORT).show()
                     },

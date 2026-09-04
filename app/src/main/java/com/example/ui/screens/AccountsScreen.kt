@@ -124,7 +124,7 @@ fun AccountsScreen(
 
             matchesSearch && matchesFilter
         }.sortedWith(
-            compareByDescending<Customer> { (customerDebtsMap[it.id] ?: Money.ZERO).amountMinor }
+            compareByDescending<Customer> { (customerDebtsMap[it.id] ?: Money.ZERO).minorUnits }
                 .thenBy { it.name }
         )
     }
@@ -194,7 +194,7 @@ fun AccountsScreen(
                         .testTag("accounts_search_field"),
                     placeholder = {
                         Text(
-                            text = strings.searchCustomer,
+                            text = strings.searchCustomerHint,
                             fontSize = 14.sp
                         )
                     },
@@ -309,7 +309,7 @@ fun AccountsScreen(
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(
-                                text = if (searchQuery.isNotBlank()) strings.emptyState else strings.noData,
+                                text = if (searchQuery.isNotBlank()) strings.emptyState else strings.noResultsMessage,
                                 style = MaterialTheme.typography.bodyLarge.copy(
                                     fontWeight = FontWeight.SemiBold,
                                     color = MaterialTheme.colorScheme.onSurface

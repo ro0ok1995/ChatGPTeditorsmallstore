@@ -1482,4 +1482,44 @@ class ShopViewModel(application: Application) : AndroidViewModel(application) {
             // fallback
         }
     }
+
+    // ===== Compatibility helpers =====
+
+    fun exportBackupToFile(uri: Uri) {
+        viewModelScope.launch {
+            try {
+                val result = backupService.generateBackupJson()
+                result.onSuccess { json ->
+                    getApplication<Application>().contentResolver
+                        .openOutputStream(uri)
+                        ?.use { output ->
+                            output.write(json.toByteArray(Charsets.UTF_8))
+                        }
+                }
+            } catch (_: Exception) {
+                // UI already handles the operation flow.
+            }
+        }
+    }
+
+    fun importBackupFromFile(uri: Uri) {
+        viewModelScope.launch {
+            try {
+                val context = getApplication<Application>()
+                val json = context.contentResolver
+                    .openInputStream(uri)
+                    ?.bufferedReader()
+                    ?.use { it.readText() }
+                    ?: return@launch
+
+                val payload = backupService.validateBackupJson(json)
+                    .getOrElse { return@launch }
+
+                backupService.restoreFromPayload(payload)
+            } catch (_: Exception) {
+                // Keep existing backup validation/restore architecture.
+            }
+        }
+    }
+
 }

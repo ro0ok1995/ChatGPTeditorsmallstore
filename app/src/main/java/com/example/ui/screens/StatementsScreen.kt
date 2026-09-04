@@ -809,8 +809,6 @@ fun StatementsScreen(
                 )
             }
         }
-    }
-}
 
     // Modal Sheet: Transaction "More Details"
     selectedDetailsTx?.let { txDetails ->
